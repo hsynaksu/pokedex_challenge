@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex_challenge/filter_button.dart';
-import 'package:pokedex_challenge/pokemon_list.dart';
-import 'package:pokedex_challenge/search_button.dart';
+import 'package:pokedex_challenge/presentation/filter/filter_button.dart';
+import 'package:pokedex_challenge/presentation/list/pokemon_list.dart';
+import 'package:pokedex_challenge/presentation/search/search_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_challenge/models/pokemon.dart';
 
 class PokemonTile extends StatelessWidget {
-  final int id;
+  final Pokemon pokemon;
 
-  const PokemonTile({super.key, required this.id});
+  const PokemonTile({super.key, required this.pokemon});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 80,
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Theme.of(context).colorScheme.surface,
@@ -28,7 +30,7 @@ class PokemonTile extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
             child: Text(
-              id.toString(),
+              pokemon.id.toString(),
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Theme.of(context).colorScheme.surface,
                   ),
@@ -39,32 +41,28 @@ class PokemonTile extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Balbasaur",
+                pokemon.name,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),
               const SizedBox(height: 4),
               Row(
-                children: [
-                  Chip(
-                    padding: EdgeInsets.all(4),
-                    label: Text(
-                      "Grass",
-                      style: Theme.of(context).textTheme.labelLarge,
-                    ),
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                  const SizedBox(width: 4),
-                  Chip(
-                    padding: EdgeInsets.all(4),
-                    label: Text(
-                      "Poison",
-                      style: Theme.of(context).textTheme.labelLarge,
-                    ),
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                ],
+                children: pokemon.types
+                    .map(
+                      (type) => Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: Chip(
+                          padding: const EdgeInsets.all(4),
+                          label: Text(
+                            type.name,
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                      ),
+                    )
+                    .toList(),
               )
             ],
           ),
@@ -73,10 +71,9 @@ class PokemonTile extends StatelessWidget {
             borderRadius: const BorderRadiusDirectional.horizontal(
               end: Radius.circular(12),
             ),
-            child: FadeInImage(
-              image: NetworkImage(
-                  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"),
-              placeholder: const AssetImage('assets/placeholder.jpg'),
+            child: FadeInImage.assetNetwork(
+              image: pokemon.defaultSpriteUrl,
+              placeholder: "assets/placeholder.jpg",
               fit: BoxFit.contain,
               imageErrorBuilder: (context, error, stackTrace) => Image.asset('assets/placeholder.jpg'),
               width: 80,
