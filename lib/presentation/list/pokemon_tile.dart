@@ -8,6 +8,9 @@ class PokemonTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final idStyle = pokemon.id > 9999 ? textTheme.labelSmall : textTheme.titleMedium;
+
     return Container(
       height: 80,
       margin: const EdgeInsets.only(bottom: 16),
@@ -31,9 +34,9 @@ class PokemonTile extends StatelessWidget {
             ),
             child: Text(
               pokemon.id.toString(),
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
+              style: idStyle?.copyWith(
+                color: Theme.of(context).colorScheme.surface,
+              ),
             ),
           ),
           Column(

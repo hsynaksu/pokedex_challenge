@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex_challenge/presentation/filter/filter_modal.dart';
-import 'package:pokedex_challenge/providers/type_filter_notifier.dart';
+import 'package:pokedex_challenge/providers/filter_handler.dart';
 
 class FilterButton extends ConsumerWidget {
   const FilterButton({super.key});
@@ -15,18 +15,18 @@ class FilterButton extends ConsumerWidget {
   }
 
   void removeSelectedFilter(WidgetRef ref) {
-    ref.read(typeFilterProvider.notifier).clearType();
+    ref.read(filterHandlerProvider.notifier).clearType();
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedType = ref.watch(typeFilterProvider);
-    final isSelected = selectedType != null;
+    final filter = ref.watch(filterHandlerProvider);
+    final isSelected = filter.type != null;
     final selectedColor = Theme.of(context).colorScheme.surfaceContainerHigh;
 
     return ActionChip(
       padding: const EdgeInsets.all(4),
-      label: Text(isSelected ? selectedType.name : "Type"),
+      label: Text(isSelected ? filter.type!.name : "Type"),
       labelStyle: Theme.of(context).textTheme.labelLarge,
       backgroundColor: isSelected ? selectedColor : null,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

@@ -23,7 +23,12 @@ const String pokemonQuery = """
   }
 """;
 
-Map<String, dynamic> getPokemonVariables({required int limit, required int offset, String? name, PokemonType? type}) {
+Map<String, dynamic> getPokemonQueryVariables({
+  required int limit,
+  required int offset,
+  String? name,
+  PokemonType? type,
+}) {
   Map<String, dynamic> filter = {};
   filter.addAll(getNameFilter(name));
   filter.addAll(getTypeFilter(type?.id));
@@ -31,11 +36,7 @@ Map<String, dynamic> getPokemonVariables({required int limit, required int offse
   Map<String, dynamic> variables = {
     "limit": limit,
     "offset": offset,
-    "filter": {
-      "pokemon_v2_pokemontypes": {
-        "pokemon_v2_pokemon": filter,
-      }
-    }
+    "filter": filter,
   };
 
   return variables;
@@ -44,7 +45,7 @@ Map<String, dynamic> getPokemonVariables({required int limit, required int offse
 Map<String, dynamic> getNameFilter(String? name) {
   return name != null
       ? {
-          "name": {"_eq": name}
+          "name": {"_ilike": "%$name%"}
         }
       : {};
 }

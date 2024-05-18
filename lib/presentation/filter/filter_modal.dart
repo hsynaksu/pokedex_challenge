@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex_challenge/presentation/filter/chip_list.dart';
-import 'package:pokedex_challenge/providers/type_filter_notifier.dart';
+import 'package:pokedex_challenge/presentation/filter/providers/fetch_pokemon_types.dart';
+import 'package:pokedex_challenge/providers/filter_handler.dart';
 
 class FilterModal extends ConsumerWidget {
   const FilterModal({super.key});
@@ -27,7 +28,7 @@ class FilterModal extends ConsumerWidget {
               return ChipList(
                 types: data,
                 onPressed: (selectedType) {
-                  ref.read(typeFilterProvider.notifier).selectType(selectedType);
+                  ref.read(filterHandlerProvider.notifier).selectType(selectedType);
                   Navigator.of(context).pop();
                 },
               );

@@ -6,7 +6,7 @@ part of 'fetch_pokemon.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchPokemonHash() => r'2d20b0e2c74c8590bdca9547aa4c5cc38514fb27';
+String _$fetchPokemonHash() => r'89f815d029d05c863e532688bb9b6013222186a8';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -42,12 +42,12 @@ class FetchPokemonFamily extends Family<AsyncValue<PokemonResponse>> {
   FetchPokemonProvider call({
     required int limit,
     required int offset,
-    PokemonType? typeFilter,
+    PokemonFilter? filter,
   }) {
     return FetchPokemonProvider(
       limit: limit,
       offset: offset,
-      typeFilter: typeFilter,
+      filter: filter,
     );
   }
 
@@ -58,7 +58,7 @@ class FetchPokemonFamily extends Family<AsyncValue<PokemonResponse>> {
     return call(
       limit: provider.limit,
       offset: provider.offset,
-      typeFilter: provider.typeFilter,
+      filter: provider.filter,
     );
   }
 
@@ -83,13 +83,13 @@ class FetchPokemonProvider extends FutureProvider<PokemonResponse> {
   FetchPokemonProvider({
     required int limit,
     required int offset,
-    PokemonType? typeFilter,
+    PokemonFilter? filter,
   }) : this._internal(
           (ref) => fetchPokemon(
             ref as FetchPokemonRef,
             limit: limit,
             offset: offset,
-            typeFilter: typeFilter,
+            filter: filter,
           ),
           from: fetchPokemonProvider,
           name: r'fetchPokemonProvider',
@@ -102,7 +102,7 @@ class FetchPokemonProvider extends FutureProvider<PokemonResponse> {
               FetchPokemonFamily._allTransitiveDependencies,
           limit: limit,
           offset: offset,
-          typeFilter: typeFilter,
+          filter: filter,
         );
 
   FetchPokemonProvider._internal(
@@ -114,12 +114,12 @@ class FetchPokemonProvider extends FutureProvider<PokemonResponse> {
     required super.from,
     required this.limit,
     required this.offset,
-    required this.typeFilter,
+    required this.filter,
   }) : super.internal();
 
   final int limit;
   final int offset;
-  final PokemonType? typeFilter;
+  final PokemonFilter? filter;
 
   @override
   Override overrideWith(
@@ -136,7 +136,7 @@ class FetchPokemonProvider extends FutureProvider<PokemonResponse> {
         debugGetCreateSourceHash: null,
         limit: limit,
         offset: offset,
-        typeFilter: typeFilter,
+        filter: filter,
       ),
     );
   }
@@ -151,7 +151,7 @@ class FetchPokemonProvider extends FutureProvider<PokemonResponse> {
     return other is FetchPokemonProvider &&
         other.limit == limit &&
         other.offset == offset &&
-        other.typeFilter == typeFilter;
+        other.filter == filter;
   }
 
   @override
@@ -159,7 +159,7 @@ class FetchPokemonProvider extends FutureProvider<PokemonResponse> {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, limit.hashCode);
     hash = _SystemHash.combine(hash, offset.hashCode);
-    hash = _SystemHash.combine(hash, typeFilter.hashCode);
+    hash = _SystemHash.combine(hash, filter.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -172,8 +172,8 @@ mixin FetchPokemonRef on FutureProviderRef<PokemonResponse> {
   /// The parameter `offset` of this provider.
   int get offset;
 
-  /// The parameter `typeFilter` of this provider.
-  PokemonType? get typeFilter;
+  /// The parameter `filter` of this provider.
+  PokemonFilter? get filter;
 }
 
 class _FetchPokemonProviderElement
@@ -185,7 +185,7 @@ class _FetchPokemonProviderElement
   @override
   int get offset => (origin as FetchPokemonProvider).offset;
   @override
-  PokemonType? get typeFilter => (origin as FetchPokemonProvider).typeFilter;
+  PokemonFilter? get filter => (origin as FetchPokemonProvider).filter;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
