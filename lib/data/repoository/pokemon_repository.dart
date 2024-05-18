@@ -1,11 +1,13 @@
 import 'package:hasura_connect/hasura_connect.dart';
+import 'package:pokedex_challenge/data/queries/details_query.dart';
 import 'package:pokedex_challenge/data/queries/names_query.dart';
 import 'package:pokedex_challenge/data/queries/types_query.dart';
 import 'package:pokedex_challenge/data/queries/pokemon_query.dart';
+import 'package:pokedex_challenge/models/pokemon_details.dart';
 import 'package:pokedex_challenge/models/pokemon_filter.dart';
 import 'package:pokedex_challenge/models/pokemon_response.dart';
 import 'package:pokedex_challenge/models/pokemon_type.dart';
-import 'package:pokedex_challenge/utils/graphql_provider.dart';
+import 'package:pokedex_challenge/providers/graphql_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'pokemon_repository.g.dart';
@@ -48,6 +50,16 @@ class PokemonRepository {
     final names = nameList.map((nameObj) => nameObj["name"] as String);
 
     return names.toList();
+  }
+
+  Future<PokemonDetails> fetchPokemonDetails(int pokemonId) async {
+    final response = await grapqlClient.query(
+      detailsQuery,
+      variables: {"id": pokemonId},
+    );
+
+    final resultList = response['data']['pokemonDetails'] as List<dynamic>;
+    return PokemonDetails.fromJson(resultList[0] as Map<String, dynamic>);
   }
 }
 
