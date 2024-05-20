@@ -12,4 +12,10 @@ class PokemonFilter {
       type: type ?? this.type,
     );
   }
+
+  @override
+  bool operator ==(Object other) => other is PokemonFilter && name == other.name && type == other.type;
+
+  @override
+  int get hashCode => Object.hash(name, type);
 }

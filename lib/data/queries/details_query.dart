@@ -1,9 +1,6 @@
 const String detailsQuery = """
   query detailsQuery(\$id: Int!) {
     pokemonDetails: pokemon_v2_pokemon(where: {id: {_eq: \$id}}) {
-      id
-      name
-      pokemon_species_id
       height
       weight
       pokemon_v2_pokemonspecy {
@@ -16,6 +13,7 @@ const String detailsQuery = """
       }
       pokemon_v2_pokemonabilities {
         pokemon_v2_ability {
+          # Get english ability names
           pokemon_v2_abilitynames(where: {language_id: {_eq: 9}}) {
             name
           }
@@ -24,6 +22,7 @@ const String detailsQuery = """
       pokemon_v2_pokemonstats {
         base_stat
         pokemon_v2_stat {
+          # Get english stat names
           pokemon_v2_statnames(where: {language_id: {_eq: 9}}) {
             name
           }

@@ -4,9 +4,7 @@ import 'package:pokedex_challenge/presentation/search/search_page.dart';
 import 'package:pokedex_challenge/providers/filter_handler.dart';
 
 class SearchButton extends ConsumerWidget {
-  final String searchedText;
-
-  const SearchButton({super.key, required this.searchedText});
+  const SearchButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

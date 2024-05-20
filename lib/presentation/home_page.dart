@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SearchButton(searchedText: ''),
+              SearchButton(),
               SizedBox(height: 8),
               FilterButton(),
               SizedBox(height: 16),

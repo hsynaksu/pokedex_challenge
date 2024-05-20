@@ -14,6 +14,8 @@ dependencies:
   hasura_connect: ^5.0.0+3
   flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5
+  mockito: ^5.4.4
+  mocktail_image_network: ^1.1.0
 
 dev_dependencies:
   flutter_test:

@@ -24,32 +24,34 @@ class PokemonList extends ConsumerWidget {
 
     return totalPokemon != null && totalPokemon == 0
         ? const NoPokemonFound()
-        : Expanded(
-            child: Material(
-              child: ListView.separated(
-                key: ValueKey(filter),
-                itemCount: totalPokemon ?? 0,
-                separatorBuilder: (context, index) => const SizedBox(height: 16),
-                itemBuilder: (context, index) {
-                  final page = index ~/ pageSize + 1;
-                  final indexInPage = index % pageSize;
+        : firstPage.isLoading
+            ? const LinearProgressIndicator()
+            : Expanded(
+                child: Material(
+                  child: ListView.separated(
+                    key: ValueKey(filter),
+                    itemCount: totalPokemon ?? 0,
+                    separatorBuilder: (context, index) => const SizedBox(height: 16),
+                    itemBuilder: (context, index) {
+                      final page = index ~/ pageSize + 1;
+                      final indexInPage = index % pageSize;
 
-                  final result = ref.watch(fetchPokemonProvider(
-                    limit: pageSize,
-                    offset: (page - 1) * pageSize,
-                    filter: filter,
-                  ));
+                      final result = ref.watch(fetchPokemonProvider(
+                        limit: pageSize,
+                        offset: (page - 1) * pageSize,
+                        filter: filter,
+                      ));
 
-                  return result.when(
-                    data: (data) => PokemonTile(
-                      pokemon: data.pokemonList[indexInPage],
-                    ),
-                    error: (err, stTrace) => Text(err.toString()),
-                    loading: () => indexInPage == 0 ? const LinearProgressIndicator() : null,
-                  );
-                },
-              ),
-            ),
-          );
+                      return result.when(
+                        data: (data) => PokemonTile(
+                          pokemon: data.pokemonList[indexInPage],
+                        ),
+                        error: (err, stTrace) => Text(err.toString()),
+                        loading: () => indexInPage == 0 ? const LinearProgressIndicator() : null,
+                      );
+                    },
+                  ),
+                ),
+              );
   }
 }

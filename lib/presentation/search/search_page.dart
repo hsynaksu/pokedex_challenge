@@ -37,23 +37,17 @@ class _SearchPageState extends ConsumerState<SearchPage> {
     Navigator.of(context).pop();
   }
 
-  // When user taps magnify icon on keyboard,
-  // set the name filter to the value and return back
   void handleSubmit(String name) {
     ref.read(filterHandlerProvider.notifier).selectName(name);
     Navigator.of(context).pop();
   }
 
-  // When user types in the textfield, debounce it
-  // After user stops typing, search list will be updated
   void handleChange(String value) {
     ref.read(searchNameDebouncerProvider.notifier).setDebounced(value);
   }
 
   @override
   Widget build(BuildContext context) {
-    // fetchPokemonNamesProvider looks at searchNameDebouncerProvider
-    // and gets name recommendations from pokeapi
     final recommendedNames = ref.watch(fetchPokemonNamesProvider);
 
     return Scaffold(

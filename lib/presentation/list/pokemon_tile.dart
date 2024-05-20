@@ -20,6 +20,7 @@ class PokemonTile extends StatelessWidget {
     final idStyle = pokemon.id > 9999 ? textTheme.labelSmall : textTheme.titleMedium;
 
     return InkWell(
+      borderRadius: BorderRadius.circular(12),
       onTap: () => handleTap(context),
       child: Ink(
         height: 80,
