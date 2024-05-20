@@ -1,16 +1,25 @@
-# pokedex_challenge
+# Pokedex Mobile App
 
-A new Flutter project.
+This application allows you to browse through Pokemon records using the public PokeAPI. You can view information about different Pokemon, search for specific ones, and even filter them based on their types. I used GraphQl for accessing PokeAPI and riverpod for state management.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- List Pokemons
+- Search and Filter
+- Pokemon Details
 
-A few resources to get you started if this is your first Flutter project:
+## How to Run
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Download or Clone the repo
+2. Install all the packages by typing the following command into your terminal
+   ```sh
+   flutter pub get
+   ```
+3. Run tests
+   ```sh
+   flutter test
+   ```
+4. Run the App.
+   ```sh
+   flutter run
+   ```
